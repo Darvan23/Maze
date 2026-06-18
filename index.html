@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forest Maze Escape</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="app">
+        <section class="screen start-screen" id="startScreen">
+            <div class="forest-art" aria-hidden="true">
+                <span class="moon"></span>
+                <span class="tree tree-a"></span>
+                <span class="tree tree-b"></span>
+                <span class="tree tree-c"></span>
+                <span class="runner"></span>
+                <span class="wolf">
+                    <span class="wolf-preview-tail"></span>
+                    <span class="wolf-preview-wing"></span>
+                    <span class="wolf-preview-spine"></span>
+                </span>
+            </div>
+            <div class="start-copy">
+                <p class="eyebrow">15 chapter maze chase</p>
+                <h1>Aimee's Forest Escape</h1>
+                <p>Aimee finds an old lantern beside the river and the forest wakes around her. Her family and friends are hidden through the huge maze, each one giving her courage, jokes, advice, or a way to keep going.</p>
+                <div class="start-options" aria-label="Game options">
+                    <label class="option-row">
+                        <span>Sound effects</span>
+                        <input type="checkbox" id="soundToggle" checked>
+                    </label>
+                    <label class="option-row">
+                        <span>Hero skin</span>
+                        <select id="playerSkinSelect">
+                            <option value="aimee">Aimee</option>
+                            <option value="hannah">Hannah</option>
+                            <option value="sophie">Sophie</option>
+                            <option value="maddy">Maddy</option>
+                            <option value="akhink">Akhink</option>
+                            <option value="rojin">Rojin</option>
+                            <option value="hajin">Hajin</option>
+                        </select>
+                    </label>
+                    <label class="option-row">
+                        <span>Chaser skin</span>
+                        <select id="wolfSkinSelect">
+                            <option value="wolf">Real Wolf</option>
+                            <option value="fox">Fox</option>
+                            <option value="bear">Bear</option>
+                            <option value="dragon">Dragon</option>
+                        </select>
+                    </label>
+                </div>
+                <button class="primary-btn" id="startButton">Start Game</button>
+            </div>
+        </section>
+
+        <section class="screen game-screen hidden" id="gameScreen" aria-label="Maze game">
+            <header class="hud">
+                <div>
+                    <span class="label">Chapter</span>
+                    <strong id="levelText">1 / 15</strong>
+                </div>
+                <div>
+                    <span class="label">Steps</span>
+                    <strong id="stepsText">0</strong>
+                </div>
+                <div>
+                    <span class="label">Tool</span>
+                    <strong id="toolText">Bones x3</strong>
+                </div>
+                <div>
+                    <span class="label">Wolves</span>
+                    <strong id="wolvesText">1 / 1</strong>
+                </div>
+                <div>
+                    <span class="label">Trophies</span>
+                    <strong id="trophyText">0</strong>
+                </div>
+                <button class="small-btn" id="restartButton">Restart</button>
+            </header>
+
+            <div class="status-bar" id="messageText">Find the cabin. Use the forest tools to mislead the wolves.</div>
+            <div class="story-card">
+                <span class="label">Story</span>
+                <p id="storyText">The first path opens under the moonlight.</p>
+            </div>
+            <div class="maze-wrap">
+                <div class="maze" id="maze" role="grid" aria-label="Forest maze board"></div>
+            </div>
+
+            <div class="touch-controls" aria-label="Movement controls">
+                <button class="control-btn empty" tabindex="-1" aria-hidden="true"></button>
+                <button class="control-btn" data-move="up" aria-label="Move up">▲</button>
+                <button class="control-btn tool-use" id="toolButton" aria-label="Use tool">✦</button>
+                <button class="control-btn" data-move="left" aria-label="Move left">◀</button>
+                <button class="control-btn" data-move="down" aria-label="Move down">▼</button>
+                <button class="control-btn" data-move="right" aria-label="Move right">▶</button>
+            </div>
+        </section>
+
+        <section class="modal hidden" id="modal" aria-live="polite">
+            <div class="modal-panel">
+                <h2 id="modalTitle">Level Complete</h2>
+                <p id="modalText">You escaped this maze.</p>
+                <div class="quiz-options hidden" id="quizOptions"></div>
+                <button class="primary-btn" id="modalButton">Next Level</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
