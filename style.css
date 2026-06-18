@@ -18,6 +18,11 @@
     box-sizing: border-box;
 }
 
+html {
+    min-height: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
 body {
     margin: 0;
     min-height: 100vh;
@@ -27,10 +32,13 @@ body {
         radial-gradient(circle at 18% 12%, rgba(193, 123, 48, 0.18), transparent 28%),
         radial-gradient(circle at 83% 16%, rgba(100, 129, 113, 0.16), transparent 22%),
         linear-gradient(135deg, #17211b, #0c120f 55%, #211a14);
+    overscroll-behavior: none;
 }
 
 button {
     font: inherit;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .app {
@@ -531,6 +539,10 @@ h1 {
 .game-screen {
     display: grid;
     gap: 12px;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
 }
 
 .hud,
@@ -613,6 +625,7 @@ h1 {
         rgba(248, 243, 231, 0.92);
     border-radius: 8px;
     box-shadow: var(--shadow);
+    touch-action: none;
 }
 
 .maze {
@@ -1426,6 +1439,10 @@ h1 {
     justify-content: center;
     gap: 8px;
     padding-top: 4px;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
 }
 
 .control-btn {
@@ -1436,6 +1453,9 @@ h1 {
     border-radius: 8px;
     box-shadow: 0 5px 0 #1d392c;
     font-size: 1.35rem;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .control-btn.tool-use {

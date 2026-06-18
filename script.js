@@ -1381,11 +1381,13 @@ function handleKeydown(event) {
 }
 
 function handleTouchStart(event) {
+    event.preventDefault();
     const touch = event.changedTouches[0];
     touchStart = { x: touch.clientX, y: touch.clientY };
 }
 
 function handleTouchEnd(event) {
+    event.preventDefault();
     if (!touchStart) return;
 
     const touch = event.changedTouches[0];
@@ -1402,9 +1404,30 @@ function handleTouchEnd(event) {
     }
 }
 
+let lastPointerPress = 0;
+
+function bindPress(element, handler) {
+    element.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "touch" || event.pointerType === "pen") {
+            event.preventDefault();
+            lastPointerPress = Date.now();
+            handler(event);
+        }
+    });
+
+    element.addEventListener("click", (event) => {
+        if (Date.now() - lastPointerPress < 500) {
+            event.preventDefault();
+            return;
+        }
+
+        handler(event);
+    });
+}
+
 startButton.addEventListener("click", startGame);
 restartButton.addEventListener("click", restartLevel);
-toolButton.addEventListener("click", useTool);
+bindPress(toolButton, useTool);
 modalButton.addEventListener("click", handleModalButton);
 soundToggle.addEventListener("change", applyStartOptions);
 playerSkinSelect.addEventListener("change", applyStartOptions);
@@ -1413,11 +1436,11 @@ document.addEventListener("keydown", handleKeydown);
 window.addEventListener("resize", () => {
     if (gameActive) renderMaze();
 });
-mazeEl.addEventListener("touchstart", handleTouchStart, { passive: true });
-mazeEl.addEventListener("touchend", handleTouchEnd, { passive: true });
+mazeEl.addEventListener("touchstart", handleTouchStart, { passive: false });
+mazeEl.addEventListener("touchend", handleTouchEnd, { passive: false });
 
 document.querySelectorAll("[data-move]").forEach((button) => {
-    button.addEventListener("click", () => movePlayer(button.dataset.move));
+    bindPress(button, () => movePlayer(button.dataset.move));
 });
 
 updateSkinPreviews();
